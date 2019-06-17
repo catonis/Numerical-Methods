@@ -27,9 +27,8 @@ def reduce(numerator, denominator):
         #When the remainder of x/y is zero, the gcd has been found.
         if x == 0: break
     
-        #Make sure x remains the greater of the two numbers and
-        #rerun the algorithm.
-        if x < y: x, y = y, x
+        #Swap x and y so that x becomes the larger of the two.
+        x, y = y, x
     
     #Return as integers the reduced fraction which is now
     #p/y and q/y.

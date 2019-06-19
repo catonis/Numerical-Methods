@@ -5,8 +5,13 @@ Created on Mon Jun 17 02:00:09 2019
 @author: Chris Mitchell
 """
 
-#Summation - Returns the sum of vector elements
+
 def Summation(vector):
+    """Simply sum the elements of the vector.
+    
+    Summation takes a vector passed in as a list and returns the sum of
+    the elements of the vector.
+    """
     
     sum = 0
     for element in vector:
@@ -15,9 +20,16 @@ def Summation(vector):
     return sum
 
 
-#DotProduct - Returns the dot product of two vectors
 def DotProduct(vector1, vector2):
+    """Calculates the dot product of two vectors.
     
+    Returns the dot product of two equally sized vectors. This value
+    is the sum of the products of equally indexed elements in the vector.
+    The return value is a float or an integer depending on the field
+    of the vectors.
+    """"
+    
+    #If the vectors are different sizes, the dot product is undefined.
     if len(vector1) != len(vector2):
         raise Exception("Passed vectors are of different dimensions.")
     
@@ -28,8 +40,14 @@ def DotProduct(vector1, vector2):
     return dotProduct
 
 
-#Euclidian Norm - Returns the vector length
 def EuclideanNorm(vector, tail = 0):
+    """Calculate the Euclidean norm or length of the given vector.
+    
+    This function assumes that the tail of the vector is at the origin.
+    If the tail is at a different set of coordinates than the origin,
+    it can be passed in as a second list. The length of the vector is
+    returned as a float or integer depending on the coordinates.
+    """
     
     from math import sqrt
     

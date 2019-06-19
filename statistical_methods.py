@@ -5,8 +5,13 @@ Created on Mon Jun 17 02:00:24 2019
 @author: Chris Mitchell
 """
 
-#Mean - Returns the mean (average) of the population.
+
 def StatsMean(population):
+    """Calculates the mean of the population.
+    
+    StatsMean takes a list of numbers, rationals, integers, or both, and
+    returns the statistical mean or average of all the values as a float.
+    """
     
     total = 0
     for i in population:
@@ -15,8 +20,15 @@ def StatsMean(population):
     return total / len(population)
     
 
-#Median - Returns the median of the population.
 def StatsMedian(population):
+    """Calculates the median of the population.
+    
+    StatsMedian takes a list of numbers, rationals, integers, or both, and
+    returns the median, or middle value, of the population. If there are
+    two middles values, i.e., the population contains an even number of
+    elements, the mean of those two values is taken as the median.
+    The median is returned as a float.
+    """
     
     population.sort()
     
@@ -32,8 +44,14 @@ def StatsMedian(population):
     return median
 
 
-#Mode - Returns the mode of the population
 def StatsMode(population):
+     """Calculates the mode of the population.
+    
+    StatsMode takes a list of numbers, rationals, integers, or both, and
+    returns the mode. The mode is the element appearing most often in the
+    population. If two or more elements share the same maximum count,
+    the lowest values element is returned. The return value is a float.
+    """
     
     #Build a dictionary to count equal data points.
     countDict = {}
@@ -45,24 +63,36 @@ def StatsMode(population):
     maxMode = 0
     maxIndex = 0
     for k, v in countDict.items():
+        #Select the value with the most occurances in the population.
         if v > maxMode:
             maxMode = v
             maxIndex = k
+        #If two or more elements share the same count, find the lowest.
         elif v == maxMode and k < maxIndex:
             maxIndex = k
     
     return maxIndex
 
 
-#Quartiles - Returns a tuple of length three containing the
-#first, second (median), and third quartiles.
 def StatsQuartiles(population):
+     """Calculates the first, second, and third quartiles of the population.
+    
+    StatsQuartiles takes a list of numbers, rationals, integers, or both.
+    From this population the median is calculated, which divides the
+    sample into A[low...median] and A[median + 1...hight]. The median for
+    these two subarrays are calculated as the first and third quartile
+    respectively. The three quartiles, first, second, and third are 
+    returned as a tuple of floats.
+    """
     
     population.sort()
 
-    firstQuartile = StatsMedian(population[:len(population) // 2])    
+    #The first quartile is the median of A[low...median]
+    firstQuartile = StatsMedian(population[:len(population) // 2])
+    #The second quartile is the median of the population.    
     secondQuartile = StatsMedian(population)
     
+    #The thirds quartile is the median of A[median + 1...high]
     if len(population) % 2 == 0:
         thirdQuartile = StatsMedian(population[len(population) // 2:])
     else:
@@ -71,8 +101,19 @@ def StatsQuartiles(population):
     return firstQuartile, secondQuartile, thirdQuartile
 
     
-#Variance - Returns the variance of the population.
 def StatsVariance(population):
+     """Calculates the variance of the population.
+    
+    StatsVariance takes a list of numbers, rationals, integers, or both,
+    and returns the variance of the population. The variance being
+    the sum of the distances of each element to the mean squared.
+    This number is also represented in statistics as sigma squared:
+        
+        sigma ** 2 = Sum from i = 0 to n of [(population[i] - mean) ** 2]
+        
+    The variance is returned as a float or integer depending on the
+    elements of the population.
+    """
     
     mean = StatsMean(population)
     
@@ -83,9 +124,24 @@ def StatsVariance(population):
     return summation / len(population)
 
 
-#Standard Deviation - Returns the standard deviation of the population.
 def StatsStandardDeviation(population):
+    """Calculates the standard deviation of the population.
+    
+    StatsStandardDeviation takes a list of numbers, rationals, integers,
+    or both, and returns the standard deviation of the population. The
+    standard deviation being the square root of the sum of the distances
+    of each element to the mean squared. This number is also represented
+    in statistics as sigma:
+        
+        sigma = sqrt(Sum from i = 0 to n of [(population[i] - mean) ** 2])
+        
+    With the aforementioned StatsVariance, calculating the standard
+    deviation is simply taking the square root of the variance.  The
+    standard deviation is returned as a float or integer depending on the
+    elements of the population.
+    """
     
     from math import sqrt
     
+    #Simply return the square root of the variance.
     return sqrt(StatsVariance(population))

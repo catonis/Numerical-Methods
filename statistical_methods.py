@@ -153,3 +153,69 @@ def StatsStandardDeviation(population):
     
     #Simply return the square root of the variance.
     return sqrt(StatsVariance(population))
+
+
+def StatsnCk(n, k):
+    """Returns the binomial coefficient of the kth term of (1 + x)^n,
+    also known as n choose k. This also gives us the number of combinations
+    selecting k items from n without repitition where order does not
+    matter. Takes two integers, n and k, and returns the coefficient as
+    an integer.
+    """
+    
+    from math import factorial
+    
+    return(factorial(n) / (factorial(k) * factorial(n - k)))
+    
+    
+def StatsnPk(n, k):
+    """Returns the number of permutations selecting k items from n without
+    repitition where order matters. Takes two integers, n and k, and
+    returns the number of combinations as an integer.
+    """
+    
+    from math import factorial
+    
+    return(factorial(n) / factorial(n - k))
+    
+
+def StatsBinomialDistribution(successNumber, totalTrials, probabilityOfSuccess):
+    """Returns the result of a particular binomial experiment. Takes two
+    integers, successNumber and totalTrials, and a float, probabilityOfSuccess,
+    and returns a float.
+    
+    The binomial distribution is the probability distribution for the
+    binomial random variable, given by the following probability mass
+    function:
+        
+        b(x, n, p) = nCx * p^x * q^(n - x)
+        
+    Where q is equal to 1 - p.
+    """
+    
+    probabilityOfFailure = 1 - probabilityOfSuccess
+    
+    probability = StatsnCk(totalTrials, successNumber) * \
+                     (probabilityOfSuccess ** successNumber) * \
+                     (probabilityOfFailure ** (totalTrials - successNumber))
+                     
+    return probability
+
+
+def StatsGeometricDistribution(totalTrials, probabilityOfSuccess):
+    """Returns the result of a statistical experiment with geometric
+    distribution. Takes one integer, totalTrials, and one float,
+    probabilityOfSuccess, and returns a float.
+    
+    The geometric distribution is a negative binomial distribution where
+    the number of successes is . We express this with the following formula:
+        
+        g(n, p) = q^(n - 1) *  p
+        
+    Where p is 1 - q.
+    """
+    
+    probabilityOfFailure = 1 - probabilityOfSuccess
+    
+    return((probabilityOfFailure ** (totalTrials - 1)) * probabilityOfSuccess)
+    

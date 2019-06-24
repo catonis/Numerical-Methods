@@ -107,3 +107,49 @@ def AstroGDate2JDate(year, month, day):
                     int(30.6001 * (m + 1)) + day + 1720994.5
                     
     return julianDay
+
+
+def AstroJDate2GDate(julianDate):
+    """The funciton converts the Julian day number to its date in the
+    Gregorian calendar. If the resulting Gregorian year in BCE, then
+    the integer value for the Gregorian year will be a negative number.
+    The function takes a float and returns the corresponding year and
+    month, both as integers, and day, which may be either a float or integer.
+    """
+    
+    from math import modf
+    
+    julianDate += 0.5
+    
+    decimalJD, integerJD = modf(julianDate)
+    
+    if integerJD > 2299160:
+        a = int((integerJD - 1867216.25) / 36524.25)
+        yearOffset = integerJD + 1 + a - int(a / 4)
+    else:
+        yearOffset = integerJD
+    
+    dayVarC = yearOffset + 1524
+    dayVarD = int((dayVarC - 122.1) / 365.25)
+    dayVarE = int(dayVarD * 365.25)
+    dayVarF = int((dayVarC - dayVarE) / 30.6001)
+    gregorianDay = dayVarC - dayVarE + decimalJD - int(30.6001 * dayVarF)
+    
+    if dayVarF < 13.5:
+        gregorianMonth = dayVarF - 1
+    else:
+        gregorianMonth = dayVarF - 13
+    
+    if gregorianMonth > 2.5:
+        gregorianYear = dayVarD - 4716
+    else:
+        gregorianYear = dayVarD - 4715
+    
+    #Adjust day in case of rounding error.
+    if abs(gregorianDay - round(gregorianDay)) < (10 ** -6):
+        gregorianDay = round(gregorianDay)
+    
+    return gregorianYear, gregorianMonth, gregorianDay
+    
+    
+    

@@ -42,7 +42,7 @@ def VectEuclideanNorm(vector, tail = 0):
     
     #If tail = 0, we calculate the vector length as if the tail is at
     #the origin.    
-    if tail = 0:
+    if tail == 0:
         for i in vector:
             length += i ** 2
     #If the tail is specified, measure the distance from head to tail.
@@ -51,4 +51,24 @@ def VectEuclideanNorm(vector, tail = 0):
             length += (vector[i] - origin[i]) ** 2
     
     return sqrt(length)
+    
+
+#Matrix Multiplication
+def MatxSquareMultiplication(matrixA, matrixB):
+    
+    n = len(matrixA)
+    
+    matrixC = []
+    for i in range(n):
+        matrixCRow = []
+        for j in range(n):
+            c = = 0
+            for k in range(n):
+                c += matrixA[i][k] * matrixB[k][j]
+            matrixCRow.append(c)
+        matrixC.append(matrixCRow)
+    
+    return matrixC
+            
+            
     

@@ -6,19 +6,9 @@ Created on Mon May 20 02:33:19 2019
 """
 
 def yieldPrimes():
-    """A generator that yields prime numbers"""
-
-    yield 2
+    """A generator that yields small prime numbers."""
     
-    primeCandidate = 3
-    isPrime = True
-    
-    while primeCandidate:
-        for divisor in range(2, primeCandidate // 2):
-            if primeCandidate % divisor == 0: isPrime = False
-        if isPrime: yield primeCandidate
-        primeCandidate += 2
-        isPrime = True
+    pass
 
 
 def getPrimes(breakInt = 10 ** 9):
@@ -58,3 +48,38 @@ def getPrimes(breakInt = 10 ** 9):
         if sieve[i]:
             primeList.append(i)
     return primeList
+
+
+def getGreatestPrimeDivisor(number):
+    """Takes as an integer a number and return its largest prime divisor.
+    """
+    
+    while number % 2 == 0:
+        number //= 2
+
+    i = 3
+    j = ceil(sqrt(number))
+    while True:
+        while number % i == 0 and number != i:
+            number //= i
+        if i > j: break;
+        else: i += 2
+
+    return number
+
+
+def getPrimeFactorization(number):
+    """Takes as an integer a number and returns a list containing its
+    prime factorization. For instance, calling the function with the
+    number 20 will return a list [2, 2, 5].
+    """
+    
+    factors = []
+    limit = number // 2 + 1
+    
+    for i in range(2, limit):
+        while number % i == 0:
+            factors.append(i)
+            number //= i
+
+    return factors

@@ -40,7 +40,7 @@ def getPrimes(breakInt = 10 ** 9):
             if x > y and n <= breakInt and n % 12 == 11:
                 sieve[n] = not sieve[n]
     
-    for x in range(7, floor(sqrt(breakInt))):
+    for x in range(5, floor(sqrt(breakInt))):
         if sieve[x]:
             for y in range(x ** 2, breakInt + 1 , x ** 2):
                 sieve[y] = False

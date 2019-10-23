@@ -80,6 +80,9 @@ class Vector:
             self._dtype = float
         else:
             self._dtype = int
+            
+        #Set _dim to be the dimensions of the vector.
+        self._dim = len(self._coordinates)
 
         #Initialization and type check complete.
     
@@ -91,5 +94,40 @@ class Vector:
 
     def __str__(self):
         return self.__repr__()
+    
+    def __add__(self, other):
+        self._checkTypeCompatability(other)
+        if self._origin == []:
+            return Vector([self._coordinates[i] + other._coordinates[i] for i in range(self._dim)])
+        else:
+            return Vector([self._coordinates[i] + other._coordinates[i] for i in range(self._dim)], origin = self._origin)
+        
+    def __sub__(self, other):
+        self._checkTypeCompatability(other)
+        if self._origin == []:
+            return Vector([self._coordinates[i] - other._coordinates[i] for i in range(self._dim)])
+        else:
+            return Vector([self._coordinates[i] - other._coordinates[i] for i in range(self._dim)], origin = self._origin)
+
+    def __mul__(self, other):
+        raise Exception("Multiplication with vectors is ambiguous. Please use either the dot() or cross() methods.")
+        
+    def _undef(self):
+        raise Exception("This operation is undefined on vectors.")
+
+    def _checkTypeCompatability(self, other):
+        if type(other) != Vector:
+            raise TypeError("Second argument is not of the Vector class.")
+        if len(self._coordinates) != len(other._coordinates):
+            raise Exception("Vectors are of unequal dimension.")
+        if self._origin != other._origin:
+            raise Exception("Specified origins do not match.")
+        
+    def add(self, other):
+        return self.__add__(other)
+    
+    def sub(self, other):
+        return self.__sub__(other)
+    
                 
             

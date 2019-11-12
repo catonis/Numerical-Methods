@@ -37,3 +37,6 @@ def getDeterminant(M):
             det = det + (cofactor * M[1,i] * getDeterminant(minor))
     return det
 
+M = initMatrix()
+print("The determinant of the matrix by means of the Laplace Expansion is {}.".format(getDeterminant(M)))
+print("The determinant of the matrix by means of np.linalg.det is {}.".format(int(round(np.linalg.det(M)))))

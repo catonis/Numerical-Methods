@@ -37,6 +37,12 @@ def getDeterminant(M):
             det = det + (cofactor * M[1,i] * getDeterminant(minor))
     return det
 
-M = initMatrix()
-print("The determinant of the matrix by means of the Laplace Expansion is {}.".format(getDeterminant(M)))
-print("The determinant of the matrix by means of np.linalg.det is {}.".format(int(round(np.linalg.det(M)))))
+def getTranspose(M):
+    x, y = M.shape
+    N = np.empty(shape = (5,5))
+    if x != y: raise Exception("The matrix must be square.")
+    for i in range(x):
+        for j in range(y):
+            if i != j:
+                N[i][j] = M[j][i]
+    return N

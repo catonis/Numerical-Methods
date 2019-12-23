@@ -5,12 +5,6 @@ Created on Mon May 20 02:33:19 2019
 @author: Chris Mitchell
 """
 
-def yieldPrimes():
-    """A generator that yields small prime numbers."""
-    
-    pass
-
-
 def getPrimes(breakInt = 10 ** 9):
     """This function implements the Atkin-Bernstein sieve. The function
     itself takes an integer value which is the upper boundary for the
@@ -51,8 +45,7 @@ def getPrimes(breakInt = 10 ** 9):
 
 
 def getGreatestPrimeDivisor(number):
-    """Takes as an integer a number and return its largest prime divisor.
-    """
+    """Takes as an integer a number and return its largest prime divisor."""
     
     while number % 2 == 0:
         number //= 2
@@ -66,7 +59,6 @@ def getGreatestPrimeDivisor(number):
         else: i += 2
 
     return number
-
 
 def getPrimeFactorization(number):
     """Takes as an integer a number and returns a list containing its

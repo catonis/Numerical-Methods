@@ -22,6 +22,19 @@ def divisors(number):
     
     return factors
 
+def properDivisors(number):
+    """Returns the positive integer factors of the given number as
+       a list."""
+    
+    #1 is always a factor to a given integer.
+    factors = [1]
+    
+    for n in range(2, (number // 2) + 1):
+        if number % n == 0:
+            factors.append(n)
+    
+    return factors
+
 def primeDivisors(number):
     """Returns a list of the prime factorization of a number."""
 
@@ -48,4 +61,20 @@ def countDivisors(number):
     if squareRoot * squareRoot == number:
         numFactors -= 1
         
-    
+def isAmicable(number):
+    x = sum(properDivisors(number))
+    y = sum(properDivisors(x))
+    if number == y and number != x: return True
+    return False
+
+def isPerfect(number):
+    if number == sum(properDivisors(number)): return True
+    return False
+
+def isDeficient(number):
+    if number > sum(properDivisors(numbers)): return True
+    return False
+
+def isAbundant(number):
+    if number < sum(properDivisors(number)): return True
+    return False

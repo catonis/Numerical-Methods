@@ -5,6 +5,17 @@ Created on Mon May 20 02:33:19 2019
 @author: Chris Mitchell
 """
 
+from math import sqrt, ceil, floor
+
+def gcd(x, y):
+    """Find the greatest common denominator betweeen x and y,
+    using Euclid's algorithm."""
+    
+    if x == y: return x
+
+    while y: x, y = y, x % y
+    return x
+
 def getPrimes(breakInt = 10 ** 9):
     """This function implements the Atkin-Bernstein sieve. The function
     itself takes an integer value which is the upper boundary for the
@@ -16,8 +27,6 @@ def getPrimes(breakInt = 10 ** 9):
     These are determined by examining the properties of solutions sets
     to three equations:  4x^2 + y^2 = n, 3x^2 + y^2 = n, and 3x^2 - y^2 = n.
     """
-
-    from math import sqrt, ceil, floor
     
     primeList = [2, 3, 5]
     sieve = [False] * (breakInt + 1)
@@ -75,3 +84,18 @@ def getPrimeFactorization(number):
             number //= i
 
     return factors
+
+def isPrime(number):
+    """Test if number is prime."""
+    
+    isPrimeNum = True
+    for i in range(2, int(sqrt(number) + 1)):
+        if number % i == 0: isPrimeNum = False
+    
+    return isPrimeNum
+
+def areCoprime(x, y):
+    """Determine if x and y are coprimes."""
+    
+    if gcd(x, y) == 1: return True
+    else: return False

@@ -41,6 +41,3 @@ def lcmx(*args):
         j = (args[i] * j) // gcd(args[i], j)
 
     return j
-
-
-    
